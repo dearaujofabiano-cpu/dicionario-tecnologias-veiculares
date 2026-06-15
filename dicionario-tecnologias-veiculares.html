@@ -88,6 +88,24 @@
     margin-top: 20px;
   }
 
+  .brand {
+    position: absolute;
+    top: 28px; right: 40px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+    text-align: right;
+    z-index: 2;
+  }
+
+  .brand strong { color: var(--accent2); font-weight: 600; }
+
+  @media (max-width: 640px) {
+    .brand { position: static; margin-top: 16px; text-align: left; }
+  }
+
   .header-stats {
     display: flex;
     gap: 32px;
@@ -409,6 +427,7 @@
 <body>
 
 <header>
+  <div class="brand"><strong>Navitas Core</strong><br>Soluções Digitais</div>
   <div class="header-label">▸ Referência Técnica Automotiva 2024</div>
   <h1>DICIONÁRIO<br><span>VEICULAR</span></h1>
   <p class="header-sub">Guia completo das principais tecnologias de segurança, conforto, multimídia e telemática utilizadas pelas montadoras no mercado nacional — com nomes alternativos por fabricante.</p>
@@ -442,7 +461,7 @@
     <div class="legend-item"><span class="legend-dot" style="background:var(--multi)"></span>Multimídia</div>
     <div class="legend-item"><span class="legend-dot" style="background:var(--telem)"></span>Telemática</div>
   </div>
-  <span>Dicionário Técnico Veicular · Mercado Nacional</span>
+  <span>Dicionário Técnico Veicular · Mercado Nacional · <strong style="color:var(--accent2)">Navitas Core</strong> – Soluções Digitais</span>
 </footer>
 
 <script>
