@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dicionário Técnico Veicular</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --card: #16161f;
+    --border: #1e1e2e;
+    --accent: #e8ff47;
+    --accent2: #47b8ff;
+    --accent3: #ff6b47;
+    --accent4: #b847ff;
+    --text: #e8e8f0;
+    --muted: #6b6b85;
+    --seg: #ff6b47;
+    --confort: #47b8ff;
+    --multi: #b847ff;
+    --telem: #e8ff47;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  header {
+    position: relative;
+    padding: 60px 40px 40px;
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: -80px; left: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(232,255,71,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; right: -50px;
+    width: 350px; height: 350px;
+    background: radial-gradient(circle, rgba(71,184,255,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .header-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 8vw, 100px);
+    line-height: 0.9;
+    letter-spacing: 2px;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  h1 span {
+    color: var(--accent);
+  }
+
+  .header-sub {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.6;
+    margin-top: 20px;
+  }
+
+  .header-stats {
+    display: flex;
+    gap: 32px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* CONTROLS */
+  .controls {
+    padding: 28px 40px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: rgba(10,10,15,0.95);
+    backdrop-filter: blur(20px);
+    z-index: 100;
+  }
+
+  .search-wrap {
+    position: relative;
+    flex: 1;
+    min-width: 240px;
+  }
+
+  .search-wrap input {
+    width: 100%;
+    padding: 12px 44px 12px 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .search-wrap input:focus { border-color: var(--accent); }
+  .search-wrap input::placeholder { color: var(--muted); }
+
+  .search-icon {
+    position: absolute;
+    right: 14px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    font-size: 16px;
+    pointer-events: none;
+  }
+
+  .filter-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: 10px 18px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .filter-btn:hover { border-color: var(--text); color: var(--text); }
+  .filter-btn.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
+  .filter-btn.seg.active { background: var(--seg); border-color: var(--seg); }
+  .filter-btn.confort.active { background: var(--confort); border-color: var(--confort); }
+  .filter-btn.multi.active { background: var(--multi); border-color: var(--multi); }
+  .filter-btn.telem.active { background: var(--telem); border-color: var(--telem); color: #000; }
+
+  /* MAIN */
+  main {
+    padding: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 3px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 20px;
+    margin-bottom: 60px;
+  }
+
+  /* CARD */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    animation: fadeUp 0.4s ease both;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  }
+
+  .card.seg:hover { border-color: rgba(255,107,71,0.5); box-shadow: 0 12px 40px rgba(255,107,71,0.1); }
+  .card.confort:hover { border-color: rgba(71,184,255,0.5); box-shadow: 0 12px 40px rgba(71,184,255,0.1); }
+  .card.multi:hover { border-color: rgba(184,71,255,0.5); box-shadow: 0 12px 40px rgba(184,71,255,0.1); }
+  .card.telem:hover { border-color: rgba(232,255,71,0.5); box-shadow: 0 12px 40px rgba(232,255,71,0.1); }
+
+  .card-header {
+    padding: 20px 20px 16px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .card-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .card.seg .card-tag { background: rgba(255,107,71,0.15); color: var(--seg); }
+  .card.confort .card-tag { background: rgba(71,184,255,0.15); color: var(--confort); }
+  .card.multi .card-tag { background: rgba(184,71,255,0.15); color: var(--multi); }
+  .card.telem .card-tag { background: rgba(232,255,71,0.15); color: var(--telem); }
+
+  .card-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+    line-height: 1.1;
+    flex: 1;
+  }
+
+  .card-body {
+    padding: 0 20px 20px;
+  }
+
+  .card-desc {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: #c0c0d8;
+    margin-bottom: 14px;
+  }
+
+  .card-benefit {
+    background: rgba(255,255,255,0.04);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+  }
+
+  .benefit-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .benefit-text {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .aliases-section {
+    margin-top: 10px;
+  }
+
+  .aliases-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .aliases {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .alias-chip {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 3px 9px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .alias-chip strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .no-results {
+    grid-column: 1/-1;
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--muted);
+  }
+
+  .no-results .icon { font-size: 48px; margin-bottom: 16px; }
+  .no-results p { font-size: 16px; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .count-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    background: var(--border);
+    padding: 3px 10px;
+    border-radius: 20px;
+    color: var(--muted);
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--muted);
+    font-size: 12px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .legend {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .legend-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+
+  @media (max-width: 640px) {
+    header, main, .controls { padding-left: 20px; padding-right: 20px; }
+    .grid { grid-template-columns: 1fr; }
+    h1 { font-size: 56px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-label">▸ Referência Técnica Automotiva 2024</div>
+  <h1>DICIONÁRIO<br><span>VEICULAR</span></h1>
+  <p class="header-sub">Guia completo das principais tecnologias de segurança, conforto, multimídia e telemática utilizadas pelas montadoras no mercado nacional — com nomes alternativos por fabricante.</p>
+  <div class="header-stats">
+    <div class="stat"><span class="stat-num" id="total-count">0</span><span class="stat-label">Tecnologias</span></div>
+    <div class="stat"><span class="stat-num">4</span><span class="stat-label">Categorias</span></div>
+    <div class="stat"><span class="stat-num">15+</span><span class="stat-label">Montadoras</span></div>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="search-wrap">
+    <input type="text" id="search" placeholder="Buscar tecnologia, nome ou montadora..." autocomplete="off">
+    <span class="search-icon">⌕</span>
+  </div>
+  <div class="filter-group">
+    <button class="filter-btn active" data-filter="all">Todas</button>
+    <button class="filter-btn seg" data-filter="seguranca">🛡 Segurança</button>
+    <button class="filter-btn confort" data-filter="conforto">✦ Conforto</button>
+    <button class="filter-btn multi" data-filter="multimidia">◈ Multimídia</button>
+    <button class="filter-btn telem" data-filter="telematica">⬡ Telemática</button>
+  </div>
+</div>
+
+<main id="main"></main>
+
+<footer>
+  <div class="legend">
+    <div class="legend-item"><span class="legend-dot" style="background:var(--seg)"></span>Segurança</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--confort)"></span>Conforto</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--multi)"></span>Multimídia</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--telem)"></span>Telemática</div>
+  </div>
+  <span>Dicionário Técnico Veicular · Mercado Nacional</span>
+</footer>
+
+<script>
+const data = [
+  // ═══════════════════ SEGURANÇA ═══════════════════
+  {
+    cat: "seguranca",
+    name: "ABS — Antibloqueio de Freios",
+    desc: "Sistema eletrônico que impede o travamento das rodas durante frenagens bruscas. Sensores monitoram a velocidade de cada roda e modulam a pressão do fluido de freio em ciclos rápidos (até 15x por segundo), mantendo o contato dos pneus com o asfalto e permitindo que o motorista mantenha a direção do veículo.",
+    benefit: "Reduz drasticamente a distância de frenagem em piso molhado e preserva a dirigibilidade durante emergências. Obrigatório no Brasil desde 2014.",
+    aliases: [
+      { brand: "Bosch/Universal", name: "ABS" },
+      { brand: "Continental", name: "Anti-lock Braking System" }
+    ]
+  },
+  {
+    cat: "seguranca",
+    name: "ESC / ESP — Controle Eletrônico de Estabilidade",
+    desc: "Sistema que detecta perda de controle do veículo comparando a intenção do motorista (via sensor do volante) com o movimento real do carro (via giroscópio e acelerômetro). Ao identificar desvio, freia rodas individualmente e pode reduzir a potência do motor para estabilizar a trajetória.",
+    benefit: "Previne capotamentos e derrapagens, especialmente em curvas rápidas, aquaplanagem e manobras evasivas. Obrigatório no Brasil desde 2014. Reduz em até 50% o risco de acidentes fatais.",
+    aliases: [
+      { brand: "Volkswagen/Bosch", name: "ESP (Electronic Stability Program)" },
+      { brand: "GM/Chevrolet", name: "StabiliTrak" },
+      { brand: "Ford", name: "AdvanceTrac / ESC" },
+      { brand: "Toyota", name: "VSC (Vehicle Stability Control)" },
+      { brand: "Honda", name: "VSA (Vehicle Stability Assist)" },
+      { brand: "BMW", name: "DSC (Dynamic Stability Control)" },
+      { brand: "Mercedes-Benz", name: "ESP (Electronic Stability Program)" },
+      { brand: "Hyundai/Kia", name: "ESC (Electronic Stability Control)" },
+      { brand: "Fiat/Stellantis", name: "ESC" },
+      { brand: "Renault", name: "ESC / ESP" }
+    ]
+  },
+  {
+    cat: "seguranca",
+    name: "TCS — Controle de Tração",
+    desc: "Evita o patinamento das rodas motrizes durante a aceleração, especialmente em superfícies escorregadias. Funciona reduzindo a potência do motor e/ou aplicando freio na roda que perde aderência, transferindo torque para a roda com mais tração.",
+    benefit: "Permite arranques seguros em pisos molhados, terra ou neve. Essencial para veículos de tração traseira e em subidas com baixa aderência.",
+    aliases: [
+      { brand: "Volkswagen", name: "ASR" },
+      { brand: "GM/Chevrolet", name: "TCS / Traction Control" },
+      { brand: "Ford", name: "TCS" },
+      { brand: "Toyota", name: "TRC (Traction Control)" },
+      { brand: "Honda", name: "TCS" },
+      { brand: "BMW", name: "DTC (Dynamic Traction Control)" },
+      { brand: "Mercedes-Benz", name: "4ETS / ASR" },
+      { brand: "Fiat", name: "TC (Traction Control)" }
+    ]
+  },
+  {
+    cat: "seguranca",
+    name: "Airbag",
+    desc: "Almofadas de segurança que se inflam em milissegundos (20–30ms) após detectar impacto via sensores de aceleração. O sistema usa um propelente químico (azida de sódio) que gera nitrogênio gasoso instantaneamente. Tipos: frontal (motorista e passageiro), lateral (torax), cortina (cabeça) e de joelhos.",
+    benefit: "Reduz drasticamente o risco de traumatismo craniano, facial e torácico em colisões. Veículos com 6+ airbags têm 5 estrelas no Latin NCAP. Os frontais são obrigatórios no Brasil desde 2014.",
+    aliases: [
+      { brand: "Universal", name: "SRS Airbag (Supplemental Restraint System)" },
+      { brand: "Honda", name: "SRS" },
+      { brand: "Toyota", name: "SRS Airbag" }
+    ]
+  },
+  {
+    cat: "seguranca",
+    name: "ISOFIX / LATCH",
+    desc: "Sistema de ancoragem rígida para cadeirinhas infantis diretamente na estrutura do veículo, sem uso do cinto de segurança. Pontos metálicos fixos permitem conexão rápida, segura e padronizada internacionalmente (ISO 13216).",
+    benefit: "Elimina o risco de instalação incorreta da cadeirinha. Reduz em até 70% o risco de lesões em crianças em caso de colisão em comparação com instalação apenas com cinto.",
+    aliases: [
+      { brand: "Europa/Universal", name: "ISOFIX" },
+      { brand: "EUA/Canadá", name: "LATCH (Lower Anchors and Tethers for Children)" },
+      { brand: "Toyota/Lexus", name: "ISOFIX" }
+    ]
+  },
+  {
+    cat: "seguranca",
+    name: "FCW — Alerta de Colisão Frontal",
+    desc: "Usa radar, câmera ou LIDAR para monitorar a distância e velocidade do veículo à frente. Quando detecta risco iminente de colisão, emite alertas visuais, sonoros e/ou hápticos (vibração no volante). Não freia o carro — apenas alerta o motorista.",
+    benefit: "Aumenta o tempo de reação do motorista. Estudos mostram redução de até 27% em colisões traseiras. Especialmente útil em vias de alta velocidade e tráfego urbano intenso.",
+    aliases: [
+      { brand: "Volkswagen", name: "Front Assist" },
+      { brand: "GM/Chevrolet", name: "Forward Collision Alert" },
+      { brand: "Ford", name: "Pre-Collision Assist" },
+      { brand: "Toyota", name: "PCS (Pre-Collision System)" },
+      { brand: "Honda", name: "Collision Mitigation Braking (CMBS)" },
+      { brand: "Hyundai", name: "Forward Collision-Avoidance Assist (FCA)" },
+      { brand: "Kia", name: "Forward Collision-Avoidance Assist" },
+      { brand: "Jeep/Fiat", name: "Forward Collision Warning" },
+      { brand: "Renault", name: "Active Emergency Braking" }
+    ]
+  },
+  {
+    cat: "seguranca",
+    name: "AEB — Frenagem Automática de Emergência",
+    desc: "Evolução do FCW: além de alertar, o sistema aplica os freios automaticamente quando detecta colisão iminente e o motorista não reage. Pode ser autônomo (freia completamente) ou de mitigação (reduz a velocidade antes do impacto). Usa radar milimétrico, câmera estéreo e/ou LIDAR.",
+    benefit: "Pode evitar colisões completamente ou reduzir drasticamente sua gravidade. Detecta também pedestres e ciclistas em modelos mais avançados. A NHTSA estima prevenção de 28.000 acidentes/ano nos EUA.",
+    aliases: [
+      { brand: "Volkswagen", name: "Front Assist com AEB" },
+      { brand: "GM/Chevrolet", name: "Automatic Emergency Braking" },
+      { brand: "Ford", name: "Pre-Collision Assist with AEB" },
+      { brand: "Toyota", name: "Pre-Collision System (PCS)" },
+      { brand: "Honda", name: "Collision Mitigation Braking System (CMBS)" },
+      { brand: "Hyundai/Kia", name: "Forward Collision-Avoidance Assist (FCA)" },
+      { brand: "Volvo", name: "City Safety" },
+      { brand: "Renault", name: "Active Emergency Braking with Pedestrian Detection" }
+    ]
+  },
+  {
+    cat: "seguranca",
+    name: "LDW / LKA — Alerta e Assistência de Faixa",
+    desc: "Câmera frontal monitora as marcações da pista. LDW (Lane Departure Warning) apenas alerta via vibração no volante ou bip quando o carro cruza a linha sem sinalização. LKA (Lane Keeping Assist) vai além: aplica torque sutil no volante para manter o veículo na faixa.",
+    benefit: "Combate a principal causa de acidentes em rodovias: saída involuntária de faixa por distração ou sonolência. Pode interagir com o sistema de direção elétrica para correções suaves.",
+    aliases: [
+      { brand: "Volkswagen", name: "Lane Assist" },
+      { brand: "GM/Chevrolet", name: "Lane Keep Assist / Lane Departure Warning" },
+      { brand: "Ford", name: "Lane-Keeping System" },
+      { brand: "Toyota", name: "Lane Departure Alert (LDA) / Lane Tracing Assist (LTA)" },
+      { brand: "Honda", name: "Lane Keeping Assist System (LKAS)" },
+      { brand: "Hyundai", name: "Lane Keeping Assist (LKA) / Lane Following Assist (LFA)" },
+      { brand: "Volvo", name: "Lane Keeping Aid" },
+      { brand: "Renault", name: "Active Lane Keeping" }
+    ]
+  },
+  {
+    cat: "seguranca",
+    name: "BSM — Monitor de Ponto Cego",
+    desc: "Radares nos para-choques traseiros monitoram a zona lateral e traseira do veículo (pontos cegos dos espelhos). Um ícone luminoso acende no espelho retrovisor lateral quando detecta veículo nessa zona. Se o motorista sinaliza para mudar de faixa com veículo no ponto cego, o alerta intensifica.",
+    benefit: "Elimina o risco de colisões ao mudar de faixa. Fundamental em estradas com tráfego intenso de caminhões e motos. Cobre aproximadamente 3,5m ao lado e atrás do veículo.",
+    aliases: [
+      { brand: "Volkswagen", name: "Side Assist" },
+      { brand: "GM/Chevrolet", name: "Rear Cross Traffic Alert / Side Blind Zone Alert" },
+      { brand: "Ford", name: "Blind Spot Information System (BLIS)" },
+      { brand: "Toyota", name: "Blind Spot Monitor (BSM)" },
+      { brand: "Honda", name: "Blind Spot Information (BSI)" },
+      { brand: "Hyundai/Kia", name: "Blind-Spot Collision Warning (BCW)" },
+      { brand: "Volvo", name: "Blind Spot Information System (BLIS)" },
+      { brand: "Jeep/RAM", name: "Blind Spot Monitoring" }
+    ]
+  },
+  {
+    cat: "seguranca",
+    name: "TPMS — Monitoramento de Pressão dos Pneus",
+    desc: "Sistema que monitora a pressão de cada pneu em tempo real. Existem dois tipos: direto (sensores físicos dentro de cada pneu que transmitem dados por radiofrequência) e indireto (usa os sensores de velocidade do ABS para inferir pressão pela variação de rotação das rodas).",
+    benefit: "Pneus calibrados corretamente reduzem consumo de combustível em até 3%, aumentam a vida útil dos pneus em 25% e evitam furos repentinos em alta velocidade. Obrigatório nos EUA desde 2008.",
+    aliases: [
+      { brand: "Universal (direto)", name: "TPMS direto" },
+      { brand: "Volkswagen (indireto)", name: "Tire Pressure Monitoring (TPM via ABS)" },
+      { brand: "BMW/Mini", name: "Flat Tyre Monitor / TPMS" },
+      { brand: "Renault", name: "Tire Pressure Alert" }
+    ]
+  },
+  {
+    cat: "seguranca",
+    name: "Hill Start Assist (HSA) / Hill Holder",
+    desc: "Mantém a pressão nos freios por 1 a 3 segundos ao arrancar em uma subida, impedindo que o veículo role para trás enquanto o motorista transfere o pé do freio para o acelerador. O sistema detecta a inclinação via sensor de ângulo e libera o freio automaticamente quando detecta que o motor está produzindo torque suficiente.",
+    benefit: "Essencial em carros com câmbio manual. Elimina a necessidade de usar o freio de mão para arrancar em rampas, evita colisões traseiras e reduz desgaste da embreagem.",
+    aliases: [
+      { brand: "Volkswagen", name: "Hill Start Assist" },
+      { brand: "GM/Chevrolet", name: "Hill Start Assist" },
+      { brand: "Ford", name: "Hill Start Assist" },
+      { brand: "Toyota", name: "Hill-start Assist Control (HAC)" },
+      { brand: "Honda", name: "Hill Start Assist" },
+      { brand: "Hyundai/Kia", name: "Hill-start Assist Control (HAC)" },
+      { brand: "Fiat", name: "Hill Holder" },
+      { brand: "Subaru", name: "Hill Holder" }
+    ]
+  },
+  {
+    cat: "seguranca",
+    name: "Câmera de Ré / Visão 360°",
+    desc: "Câmera traseira exibe imagem no painel ao engatar a ré, com linhas guias dinâmicas que se movem conforme a direção do volante. A visão 360° usa múltiplas câmeras (dianteira, traseira e laterais nos retrovisores) processadas para gerar uma imagem aérea sintética ao redor do carro.",
+    benefit: "Reduz atropelamentos de pedestres atrás do veículo (especialmente crianças), facilita estacionamento e manobras em espaços apertados. A câmera de ré é obrigatória nos EUA desde 2018.",
+    aliases: [
+      { brand: "Volkswagen", name: "Rear View Camera / Area View 360°" },
+      { brand: "GM/Chevrolet", name: "Rear Vision Camera / Surround Vision" },
+      { brand: "Ford", name: "BLIS Camera / 360-Degree Camera" },
+      { brand: "Toyota", name: "Backup Camera / Panoramic View Monitor" },
+      { brand: "Honda", name: "Multi-Angle Rearview Camera" },
+      { brand: "Hyundai", name: "Rear View Camera / Surround View Monitor" },
+      { brand: "Nissan", name: "Around View Monitor (AVM)" },
+      { brand: "BMW", name: "Reversing Camera / Surround View" }
+    ]
+  },
+  {
+    cat: "seguranca",
+    name: "Sensor de Estacionamento (PDC)",
+    desc: "Sensores ultrassônicos no para-choque dianteiro e/ou traseiro emitem pulsos de som e detectam objetos próximos pelo eco de retorno. Alertam o motorista com bipes progressivamente mais rápidos conforme se aproxima do obstáculo. Muitos sistemas integram com a câmera de ré.",
+    benefit: "Previne danos ao veículo e a objetos/pedestres durante manobras. Detecta obstáculos baixos que câmeras podem não captar (meio-fio, balizas). Cobre tipicamente de 0,3m a 1,5m.",
+    aliases: [
+      { brand: "Volkswagen/BMW/Mercedes", name: "PDC (Park Distance Control)" },
+      { brand: "Geral", name: "Sensor de Estacionamento / Park Assist Sensor" },
+      { brand: "Toyota", name: "Clearance Sonar / Back Sonar" },
+      { brand: "Honda", name: "Parking Sensor" }
+    ]
+  },
+  {
+    cat: "seguranca",
+    name: "Driver Attention Monitor",
+    desc: "Monitora o comportamento do motorista para detectar sinais de fadiga ou distração. Analisa padrões de direção (movimentos bruscos do volante, desvios de faixa), tempo ao volante e, em versões avançadas, câmera que monitora o rosto e os olhos do motorista (DMS – Driver Monitoring System).",
+    benefit: "Alerta o motorista para fazer uma pausa quando detecta sinais de sonolência — principal causa de acidentes em rodovias. Versões com câmera detectam distração por celular e piscar excessivo.",
+    aliases: [
+      { brand: "Volkswagen", name: "Driver Alert System / Fatigue Detection" },
+      { brand: "Mercedes-Benz", name: "Attention Assist" },
+      { brand: "Ford", name: "Driver Alert System" },
+      { brand: "Toyota", name: "Driver Monitoring System" },
+      { brand: "Volvo", name: "Driver Alert Control" },
+      { brand: "GM", name: "Driver Attention Alert" },
+      { brand: "Subaru", name: "DriverFocus" }
+    ]
+  },
+  {
+    cat: "seguranca",
+    name: "Freio de Estacionamento Elétrico (EPB)",
+    desc: "Substitui a alavanca ou pedal de freio de mão por um botão eletrônico. Motores elétricos acionam as pinças traseiras via sinal eletrônico. Integra-se ao sistema de segurança para aplicar automaticamente ao desligar o carro e liberar suavemente ao arrancar (Auto Hold).",
+    benefit: "Elimina o esquecimento de soltar o freio de mão, libera espaço no console central, permite Auto Hold (mantém o carro parado no trânsito sem pressionar o freio) e aplica freio de emergência automático.",
+    aliases: [
+      { brand: "Universal", name: "EPB (Electric Parking Brake)" },
+      { brand: "BMW", name: "Electric Parking Brake" },
+      { brand: "Volkswagen", name: "Electronic Parking Brake" },
+      { brand: "GM", name: "Electronic Precision Park" }
+    ]
+  },
+
+  // ═══════════════════ CONFORTO ═══════════════════
+  {
+    cat: "conforto",
+    name: "Climatizador Automático / Dual Zone",
+    desc: "Sistema de ar-condicionado com controle eletrônico que mantém a temperatura selecionada automaticamente, regulando a velocidade do ventilador, temperatura e distribuição do ar. O Dual Zone permite temperaturas independentes para motorista e passageiro dianteiro. O Tri/Quad Zone estende isso para passageiros traseiros.",
+    benefit: "Conforto térmico sem necessidade de ajuste manual constante. Sensores de temperatura e sol otimizam o funcionamento, reduzindo consumo de combustível em comparação com A/C convencional operado pelo motorista.",
+    aliases: [
+      { brand: "Universal", name: "Climatizador Automático / Dual Zone Climate Control" },
+      { brand: "Volkswagen", name: "Climatronic" },
+      { brand: "GM/Chevrolet", name: "Dual-Zone Automatic Climate Control" },
+      { brand: "Toyota", name: "Dual-Zone Automatic A/C" },
+      { brand: "Honda", name: "Dual-Zone Automatic Climate Control" }
+    ]
+  },
+  {
+    cat: "conforto",
+    name: "Partida Remota / Keyless Start",
+    desc: "Keyless Entry (acesso sem chave): sensor detecta a chave na proximidade e desbloqueia as portas automaticamente ao tocar na maçaneta. Keyless Start (partida sem chave): botão Start/Stop liga o motor sem inserir chave, desde que o controle esteja dentro do carro. Partida remota: liga o motor a distância via controle ou app.",
+    benefit: "Comodidade ao entrar com as mãos ocupadas, pré-aquecer ou pré-resfriar o interior antes de entrar, e segurança (sem necessidade de tirar chave do bolso em situações vulneráveis).",
+    aliases: [
+      { brand: "Universal", name: "Keyless Entry / Keyless Start / Push Button Start" },
+      { brand: "Mercedes-Benz", name: "KEYLESS-GO" },
+      { brand: "BMW", name: "Comfort Access" },
+      { brand: "Toyota", name: "Smart Entry & Start System" },
+      { brand: "Honda", name: "Smart Entry System" },
+      { brand: "Hyundai", name: "Smart Key" },
+      { brand: "Ford", name: "Intelligent Access with Push-Button Start" },
+      { brand: "Volkswagen", name: "Keyless Access (KESSY)" }
+    ]
+  },
+  {
+    cat: "conforto",
+    name: "Bancos Aquecidos / Ventilados / Massageadores",
+    desc: "Aquecidos: resistências elétricas integradas ao tecido/couro dos bancos aquecem em níveis reguláveis. Ventilados: micro ventiladores aspiram ou sopram ar através de perfurações nos bancos, reduzindo a temperatura do assento. Massageadores: câmaras de ar infláveis em sequência simulam massagem lombar e dorsal.",
+    benefit: "Aquecidos: essenciais em regiões frias, mais rápidos que o ar quente do A/C. Ventilados: essenciais em climas quentes, evitam o desconforto do suor em bancos de couro. Massageadores: reduzem fadiga em viagens longas.",
+    aliases: [
+      { brand: "Universal", name: "Heated / Ventilated / Massage Seats" },
+      { brand: "BMW/Mercedes", name: "Comfort Seats / Active Seats" },
+      { brand: "Volkswagen", name: "Bancos com aquecimento/ventilação" }
+    ]
+  },
+  {
+    cat: "conforto",
+    name: "Suspensão Adaptativa / Amortecedores Variáveis",
+    desc: "Sistema que ajusta o amortecimento das suspensões eletronicamente em tempo real, variando a viscosidade do fluido de amortecimento (magnetorreológico) ou a abertura de válvulas. Sensores monitoram aceleração vertical, velocidade e modo de condução para otimizar entre conforto e esportividade.",
+    benefit: "Um mesmo veículo pode ser confortável para viagens longas e firme em curvas. Reduz significativamente a fadiga em estradas ruins sem comprometer a dirigibilidade.",
+    aliases: [
+      { brand: "Volkswagen/Audi", name: "DCC (Dynamic Chassis Control)" },
+      { brand: "GM", name: "Magnetic Ride Control" },
+      { brand: "Mercedes-Benz", name: "AIRMATIC / Agility Control" },
+      { brand: "BMW", name: "Adaptive M Suspension" },
+      { brand: "Volvo", name: "Four-C (Continuously Controlled Chassis Concept)" },
+      { brand: "Ford", name: "MagneRide / CCD Suspension" }
+    ]
+  },
+  {
+    cat: "conforto",
+    name: "Cruise Control Adaptativo (ACC)",
+    desc: "Evolução do cruise control convencional: mantém a velocidade definida pelo motorista E a distância segura do veículo à frente usando radar/câmera. Desacelera e acelera automaticamente no fluxo do tráfego. Versões avançadas funcionam até velocidade zero (Stop & Go), substituindo os freios em filas.",
+    benefit: "Reduz a fadiga em viagens longas e no trânsito. O Stop & Go é essencial para conforto urbano em cidades congestionadas. Usa aceleração/freio mais suaves que o motorista médio, economizando combustível.",
+    aliases: [
+      { brand: "Volkswagen", name: "ACC (Adaptive Cruise Control)" },
+      { brand: "GM/Chevrolet", name: "Adaptive Cruise Control" },
+      { brand: "Ford", name: "Adaptive Cruise Control" },
+      { brand: "Toyota", name: "DRCC (Dynamic Radar Cruise Control)" },
+      { brand: "Honda", name: "LKAS + ACC (Honda Sensing)" },
+      { brand: "Hyundai/Kia", name: "Smart Cruise Control (SCC)" },
+      { brand: "BMW", name: "Active Cruise Control (ACC)" },
+      { brand: "Volvo", name: "Pilot Assist" },
+      { brand: "Nissan", name: "ProPILOT Assist" }
+    ]
+  },
+  {
+    cat: "conforto",
+    name: "Direção Elétrica com Assistência Variável (EPS)",
+    desc: "Substituiu a direção hidráulica. Um motor elétrico fornece assistência à direção variando a força conforme a velocidade: mais leve em manobras lentas (estacionamento) e mais firme em velocidade (estabilidade). Não consome energia do motor continuamente como a bomba hidráulica.",
+    benefit: "Economia de combustível de 3 a 5% (não há bomba hidráulica rodando em carga constante). Base para sistemas como Lane Keeping Assist, Parking Assist e Steering Corrections (ESC). Manutenção zero (sem fluido hidráulico).",
+    aliases: [
+      { brand: "Universal", name: "EPS (Electric Power Steering)" },
+      { brand: "BMW", name: "EPS / Servotronic" },
+      { brand: "Mercedes-Benz", name: "Electric Power Steering" },
+      { brand: "Volkswagen", name: "Electromechanical Steering (EPS)" }
+    ]
+  },
+  {
+    cat: "conforto",
+    name: "Teto Solar / Teto Panorâmico",
+    desc: "Teto solar convencional: painel de vidro ou metálico recuável sobre as praças dianteiras. Teto panorâmico: painéis de vidro maiores que cobrem dianteiros e/ou traseiros, fixos ou deslizantes. Laminar (bloqueia UV mas transmite luz) ou com persianas elétricas. Versões eletricamente operadas se abrem com um botão.",
+    benefit: "Luminosidade natural aumenta percepção de espaço interior. Ventilação natural em climas amenos reduz uso do A/C. O teto panorâmico elevou o padrão de sensação de amplitude mesmo em SUVs compactos.",
+    aliases: [
+      { brand: "Universal", name: "Sunroof / Moonroof / Panoramic Roof" },
+      { brand: "BMW", name: "Panoramic Glass Roof" },
+      { brand: "Mercedes-Benz", name: "Panoramic Sliding Sunroof" },
+      { brand: "Volkswagen", name: "Panoramic Sunroof" },
+      { brand: "Toyota", name: "Moonroof / Panoramic Moonroof" }
+    ]
+  },
+  {
+    cat: "conforto",
+    name: "Auto Parking / Estacionamento Automático",
+    desc: "Sistema que mede vagas via sensores ultrassônicos e câmeras, calcula a trajetória necessária e executa a manobra de estacionamento automaticamente, controlando direção e às vezes acelerador/freio. O motorista monitoriza e controla velocidade (ou o sistema faz tudo em versões mais avançadas).",
+    benefit: "Elimina o estresse de estacionar em vagas apertadas. Sistemas avançados (Remote Parking) permitem estacionar de fora do carro via app ou controle, ideal para garagens estreitas.",
+    aliases: [
+      { brand: "Volkswagen", name: "Park Assist" },
+      { brand: "Ford", name: "Active Park Assist" },
+      { brand: "BMW", name: "Parking Assistant / Remote 3D View" },
+      { brand: "Toyota", name: "Advanced Park" },
+      { brand: "Hyundai/Kia", name: "Remote Smart Parking Assist (RSPA)" },
+      { brand: "Mercedes-Benz", name: "Active Parking Assist" },
+      { brand: "GM", name: "Super Cruise Parking Assist" }
+    ]
+  },
+
+  // ═══════════════════ MULTIMÍDIA ═══════════════════
+  {
+    cat: "multimidia",
+    name: "Apple CarPlay / Android Auto",
+    desc: "Espelhamento inteligente que projeta a interface do smartphone no display do carro. CarPlay (iOS): acessa Maps, Music, Mensagens, Podcasts e apps compatíveis com controle por toque, voz (Siri) ou botões físicos. Android Auto: mesmo conceito para Android com Google Maps, Google Assistant, Spotify e apps compatíveis. Wireless: conecta via Wi-Fi sem cabo.",
+    benefit: "Uso seguro do smartphone sem tirar os olhos da estrada. Interface familiar reduz curva de aprendizado. Acesso a navegação com dados em tempo real (trânsito, radar) sem custo adicional de assinatura do carro.",
+    aliases: [
+      { brand: "Apple", name: "CarPlay" },
+      { brand: "Google", name: "Android Auto" },
+      { brand: "Universal (hardware)", name: "MirrorLink (padrão mais antigo)" }
+    ]
+  },
+  {
+    cat: "multimidia",
+    name: "Sistema de Áudio Premium / Áudio Surround",
+    desc: "Parceria das montadoras com marcas de áudio de alta fidelidade para desenvolver sistemas integrados à carroceria. Posicionamento estratégico de alto-falantes, incluindo woofer no painel ou portas, tweeters nos pilares e amplificadores dedicados. Processamento digital de som (DSP) adapta o áudio ao formato da cabine.",
+    benefit: "Qualidade de som próxima a um sistema de home theater. O DSP corrige a acústica do interior, compensando reflexões e materiais de revestimento. Cada montadora tem parceiro de áudio exclusivo.",
+    aliases: [
+      { brand: "VW/Porsche/Audi", name: "Dynaudio / Burmester / Bang & Olufsen" },
+      { brand: "Ford/Lincoln", name: "B&O Sound System / Bang & Olufsen" },
+      { brand: "Toyota/Lexus", name: "JBL / Mark Levinson" },
+      { brand: "Honda", name: "Bose Sound System" },
+      { brand: "GM/Chevrolet", name: "Bose Premium Audio" },
+      { brand: "BMW", name: "Harman Kardon / Bowers & Wilkins" },
+      { brand: "Mercedes-Benz", name: "Burmester / Dolby Atmos" },
+      { brand: "Hyundai/Kia", name: "Bose / Meridian" },
+      { brand: "Volvo", name: "Bowers & Wilkins" }
+    ]
+  },
+  {
+    cat: "multimidia",
+    name: "Head-Up Display (HUD)",
+    desc: "Projeta informações essenciais de condução diretamente no para-brisa ou em um painel transparente retrátil à frente do motorista: velocidade, limites de velocidade, seta de navegação, alertas de segurança e chamadas. O motorista lê as informações sem desviar o olhar da pista.",
+    benefit: "Reduz o tempo com os olhos fora da estrada de 2 segundos (olhar para o painel) para quase zero. Em 2 segundos a 110km/h, o carro percorre 61 metros. Fundamental para segurança ativa.",
+    aliases: [
+      { brand: "BMW", name: "Head-Up Display" },
+      { brand: "GM/Chevrolet", name: "Head-Up Display" },
+      { brand: "Toyota", name: "Head-Up Display" },
+      { brand: "Mazda", name: "Active Driving Display" },
+      { brand: "Mercedes-Benz", name: "Head-Up Display / Augmented Reality HUD" },
+      { brand: "Hyundai/Kia", name: "Head-Up Display" }
+    ]
+  },
+  {
+    cat: "multimidia",
+    name: "Carregador Wireless / Indução Qi",
+    desc: "Plataforma de carregamento por indução eletromagnética (padrão Qi) integrada ao console central. Elimina a necessidade de cabo USB. O smartphone é posicionado na área demarcada e carrega automaticamente. Alguns sistemas incluem resfriamento ativo para evitar superaquecimento do celular.",
+    benefit: "Praticidade total: sem cabos, sem conectores danificados. Mantém o celular carregado durante uso do Android Auto/CarPlay wireless. Compatível com a maioria dos iPhones (desde iPhone 8) e Android (desde 2015).",
+    aliases: [
+      { brand: "Universal", name: "Wireless Charging / Qi Charging" },
+      { brand: "BMW", name: "Wireless Charging / MagSafe" },
+      { brand: "Toyota", name: "Wireless Charger" },
+      { brand: "Ford", name: "Wireless Charging Pad" }
+    ]
+  },
+  {
+    cat: "multimidia",
+    name: "Painel Digital / Instrumentação Virtual",
+    desc: "Substitui os mostradores analógicos por uma tela LCD/TFT ou OLED totalmente configurável. Exibe velocímetro, tacômetro, nível de combustível, temperatura e integra informações de navegação, telefone e alertas do veículo. O motorista pode personalizar o layout e o que é exibido em cada modo de condução.",
+    benefit: "Informações adaptadas ao momento de condução (ex: mapa em tela cheia na navegação, dados esportivos no modo Sport). Gráficos nítidos substituem a iluminação analógica desgastável. Atualização via software.",
+    aliases: [
+      { brand: "Volkswagen", name: "Digital Cockpit / Active Info Display" },
+      { brand: "Audi", name: "Virtual Cockpit" },
+      { brand: "Ford", name: "Digital Instrument Cluster" },
+      { brand: "BMW", name: "BMW Live Cockpit / Digital Instrument Panel" },
+      { brand: "Mercedes-Benz", name: "MBUX Digital Instrument Cluster" },
+      { brand: "Toyota", name: "Digital Gauge Cluster" },
+      { brand: "Hyundai", name: "Digital Cluster / 12.3\" Supervision Cluster" }
+    ]
+  },
+  {
+    cat: "multimidia",
+    name: "Sistema de Entretenimento Traseiro",
+    desc: "Telas individuais para passageiros traseiros instaladas nos encostos dos bancos dianteiros ou no teto. Permitem reprodução de vídeo independente, jogos e até conexão própria ao Android Auto/CarPlay. Geralmente com entrada HDMI, USB e controle via tela touch ou controle remoto.",
+    benefit: "Ideal para viagens longas com crianças. Conteúdo independente para cada passageiro traseiro. Reduz distração do motorista por passageiros entediados.",
+    aliases: [
+      { brand: "Universal", name: "Rear Seat Entertainment / RSE" },
+      { brand: "Toyota/Lexus", name: "Rear Seat Entertainment System" },
+      { brand: "BMW", name: "Rear Seat Entertainment" },
+      { brand: "Mercedes-Benz", name: "Rear Seat Entertainment System" }
+    ]
+  },
+  {
+    cat: "multimidia",
+    name: "Câmera Multiview / Câmera Frontal",
+    desc: "Além da câmera de ré, sistemas avançados incluem câmera dianteira (útil em ultrapassagens, saídas de garagem e para-choque sobre obstáculos), câmeras laterais nos retrovisores e visão 360° processada por software. Algumas exibem transparência da carroceria (visão sintética abaixo do carro).",
+    benefit: "Visibilidade total ao redor do veículo em manobras complexas. A câmera frontal é fundamental em SUVs com capô alto ao entrar em cruzamentos de visibilidade limitada.",
+    aliases: [
+      { brand: "Nissan", name: "Around View Monitor (AVM)" },
+      { brand: "BMW", name: "Surround View / 3D View" },
+      { brand: "Toyota", name: "Panoramic View Monitor" },
+      { brand: "Hyundai", name: "Surround View Monitor (SVM)" },
+      { brand: "Ford", name: "360-Degree Camera" },
+      { brand: "Jeep", name: "Surround View Camera System" }
+    ]
+  },
+
+  // ═══════════════════ TELEMÁTICA ═══════════════════
+  {
+    cat: "telematica",
+    name: "Chamada de Emergência eCall / SOS Veicular",
+    desc: "Sistema que detecta acidentes graves via sensores (airbag disparado, acelerômetro) e realiza automaticamente uma chamada de emergência para uma central de atendimento ou diretamente para o 192 (SAMU), transmitindo coordenadas GPS, dados do veículo e permitindo comunicação de voz bidirecional. Pode ser acionado manualmente pelo botão SOS.",
+    benefit: "Em acidentes com incapacitação do motorista, pode salvar vidas ao chamar socorro automaticamente com localização precisa. O eCall é obrigatório na Europa desde 2018 em todos os carros novos.",
+    aliases: [
+      { brand: "Europa", name: "eCall (112 eCall)" },
+      { brand: "GM/OnStar", name: "Automatic Crash Response" },
+      { brand: "Volkswagen", name: "Emergency Call (eCall)" },
+      { brand: "Toyota", name: "Safety Connect Emergency Assistance" },
+      { brand: "Ford", name: "Ford Emergency Assistance" },
+      { brand: "BMW", name: "BMW SOS Call" },
+      { brand: "Mercedes-Benz", name: "Mercedes-Benz Emergency Call" },
+      { brand: "Volvo", name: "Volvo On Call Emergency" }
+    ]
+  },
+  {
+    cat: "telematica",
+    name: "Conectividade 4G/5G / Wi-Fi Hotspot",
+    desc: "Módulo de telecomunicações integrado ao veículo com chip SIM próprio (eSIM ou SIM removível) que provê conexão móvel independente do smartphone. Cria ponto de acesso Wi-Fi dentro do carro para múltiplos dispositivos. Habilita serviços de atualização OTA, streaming de dados em tempo real e serviços do fabricante.",
+    benefit: "Internet de alta velocidade para todos os passageiros durante a viagem. Independente da cobertura ou bateria do celular. Base para todos os serviços telemáticos: navegação live, atualizações de software, monitoramento remoto.",
+    aliases: [
+      { brand: "GM/Chevrolet", name: "OnStar 4G LTE Wi-Fi Hotspot" },
+      { brand: "Ford", name: "FordPass Connect / 4G LTE Hotspot" },
+      { brand: "Toyota", name: "Toyota Connected Services / Wi-Fi Connect" },
+      { brand: "BMW", name: "BMW Connected Drive / Hotspot" },
+      { brand: "Mercedes-Benz", name: "Mercedes me connect / LTE Hotspot" },
+      { brand: "Volkswagen", name: "Volkswagen Connect / Car-Net" }
+    ]
+  },
+  {
+    cat: "telematica",
+    name: "Navegação em Tempo Real / Over-The-Air Maps",
+    desc: "Sistema de navegação integrado com mapas continuamente atualizados via conexão de dados (4G/5G). Utiliza informações de tráfego em tempo real (TMC ou TPEG), acidentes, obras, radares e pontos de interesse atualizados. Diferente de sistemas offline, os mapas OTA nunca ficam desatualizados.",
+    benefit: "Rotas sempre otimizadas com tráfego ao vivo. Previsão de chegada precisa. Identificação de radares e câmeras. Diferencia-se do GPS offline por ter dados de tráfego e atualizações sem necessidade de serviço em concessionária.",
+    aliases: [
+      { brand: "Volkswagen", name: "Volkswagen Navigation with Online Traffic" },
+      { brand: "BMW", name: "BMW Live Cockpit Navigation / HERE Maps" },
+      { brand: "Mercedes-Benz", name: "MBUX Navigation Live Traffic" },
+      { brand: "Toyota", name: "Toyota Connected Navigation" },
+      { brand: "GM", name: "OnStar Navigation" },
+      { brand: "Ford", name: "FordPass Navigation / SYNC Navigation" },
+      { brand: "Universal", name: "Google Maps Built-In / Waze (via Android Auto)" }
+    ]
+  },
+  {
+    cat: "telematica",
+    name: "Assistente de Voz com IA / Conversacional",
+    desc: "Sistema de reconhecimento de voz natural integrado ao carro que vai além de comandos pré-definidos. Permite frases naturais como 'Estou com frio' (o sistema ajusta o A/C) ou 'Quero um café' (busca cafeterias próximas). Utiliza processamento em nuvem para compreensão semântica. Pode integrar com Alexa, Google Assistant ou assistentes proprietários.",
+    benefit: "Operação de funções do carro com zero interação manual — máxima segurança. Reduz a curva de aprendizado dos sistemas de infotainment. Funciona com linguagem natural, sem necessidade de memorizar comandos específicos.",
+    aliases: [
+      { brand: "Mercedes-Benz", name: "MBUX 'Hey Mercedes'" },
+      { brand: "BMW", name: "BMW Intelligent Personal Assistant" },
+      { brand: "Volkswagen", name: "IDA (VW Voice Assistant)" },
+      { brand: "Toyota", name: "Toyota Voice Assistant" },
+      { brand: "Amazon", name: "Alexa Built-in" },
+      { brand: "Google", name: "Google Assistant Built-in" },
+      { brand: "Apple", name: "Siri via CarPlay" }
+    ]
+  },
+  {
+    cat: "telematica",
+    name: "App de Monitoramento Remoto / Connected Car App",
+    desc: "Aplicativo para smartphone que se conecta ao veículo via servidor do fabricante (não Bluetooth). Permite: verificar status do carro (nível de combustível, pressão dos pneus, portas), localização em tempo real via GPS, histórico de viagens, bloqueio/desbloqueio remoto, pré-climatização remota e alertas de manutenção.",
+    benefit: "Controle e monitoramento do veículo de qualquer lugar. Útil para frotas, compartilhamento familiar e segurança anti-furto (rastreamento em tempo real e bloqueio de motor remotamente em alguns modelos).",
+    aliases: [
+      { brand: "GM/Chevrolet", name: "MyChevrolet / OnStar App" },
+      { brand: "Ford", name: "FordPass App" },
+      { brand: "Toyota", name: "Toyota Connected Services App" },
+      { brand: "BMW", name: "My BMW App" },
+      { brand: "Mercedes-Benz", name: "Mercedes me App" },
+      { brand: "Volkswagen", name: "Volkswagen Connect App / WeConnect" },
+      { brand: "Hyundai", name: "Bluelink App" },
+      { brand: "Kia", name: "Kia Connect App" },
+      { brand: "Jeep/Fiat/RAM", name: "Uconnect App / Mopar Vehicle Protection" }
+    ]
+  },
+  {
+    cat: "telematica",
+    name: "OTA — Atualizações Over-The-Air",
+    desc: "Capacidade do veículo de receber atualizações de software para sistemas eletrônicos (módulos de motor, câmbio, ADAS, infotainment, carregadores elétricos) via conexão de dados 4G/LTE, sem visita à concessionária. Funciona como a atualização de um smartphone: agenda fora do horário de uso, instala automaticamente e verifica integridade.",
+    benefit: "Correções de bugs, melhorias de performance e novas funcionalidades sem custo e sem deslocamento. Tesla popularizou o conceito; agora adotado por praticamente todos os fabricantes premium. Pode corrigir recalls de software remotamente.",
+    aliases: [
+      { brand: "Tesla", name: "OTA Software Updates (pioneiro)" },
+      { brand: "BMW", name: "Remote Software Upgrade" },
+      { brand: "Ford", name: "Ford Power-Up Software Updates" },
+      { brand: "GM", name: "OTA Updates via OnStar" },
+      { brand: "Volkswagen", name: "Over-the-Air Updates (OTA)" },
+      { brand: "Toyota", name: "Toyota Connected Services OTA" },
+      { brand: "Stellantis (Jeep/RAM/Fiat)", name: "Uconnect OTA Updates" }
+    ]
+  },
+  {
+    cat: "telematica",
+    name: "Diagnóstico Remoto / Telemática de Frota",
+    desc: "Sistema que coleta e transmite dados de diagnóstico do veículo (DTCs — Diagnostic Trouble Codes), quilometragem, padrão de condução, consumo e condição dos sistemas em tempo real para a central do fabricante ou gestor de frota. Permite agendamento preditivo de manutenção antes de uma falha ocorrer.",
+    benefit: "Para frotas: redução de custos de manutenção corretiva (até 25%), aumento da disponibilidade dos veículos e gestão de motoristas. Para usuários: alertas antecipados de manutenção evitam paradas inesperadas e danos maiores.",
+    aliases: [
+      { brand: "GM/Chevrolet", name: "OnStar Vehicle Diagnostics" },
+      { brand: "BMW", name: "BMW Condition Based Service (CBS)" },
+      { brand: "Mercedes-Benz", name: "Mercedes me Service" },
+      { brand: "Volkswagen", name: "Car-Net Service & Diagnostics" },
+      { brand: "Ford", name: "FordPass Vehicle Health" },
+      { brand: "Toyota", name: "Toyota Connected Service Alerts" },
+      { brand: "Bosch/Universal", name: "CDR (Crash Data Retrieval) / Fleet Telematics" }
+    ]
+  },
+  {
+    cat: "telematica",
+    name: "V2X — Comunicação Veículo com Tudo",
+    desc: "Tecnologia que permite comunicação direta entre veículos (V2V), infraestrutura viária (V2I — semáforos, radares, pedágios), rede elétrica (V2G) e pedestres via smartphones (V2P). Usa redes dedicadas (DSRC — 5.9GHz) ou 5G (C-V2X). Compartilha posição, velocidade e intenção de manobra para coordenar o tráfego.",
+    benefit: "Base para o veículo autônomo. Hoje já possibilita: alerta de semáforo prestes a abrir, aviso de veículo de emergência se aproximando, alertas de obras além da linha de visão e travessia de pedestres detectada antes de ver.",
+    aliases: [
+      { brand: "Universal (padrão)", name: "V2X (Vehicle-to-Everything)" },
+      { brand: "Qualcomm/Stellantis", name: "C-V2X (Cellular V2X via 5G)" },
+      { brand: "IEEE", name: "DSRC (Dedicated Short-Range Communications)" },
+      { brand: "Toyota", name: "ITS Connect (V2X Japão)" }
+    ]
+  }
+];
+
+// ─── Render ───
+function getCatLabel(cat) {
+  const map = { seguranca: '🛡 Segurança', conforto: '✦ Conforto', multimidia: '◈ Multimídia', telematica: '⬡ Telemática' };
+  return map[cat] || cat;
+}
+
+function render(items) {
+  const main = document.getElementById('main');
+  main.innerHTML = '';
+
+  if (items.length === 0) {
+    main.innerHTML = `<div class="grid"><div class="no-results"><div class="icon">◎</div><p>Nenhuma tecnologia encontrada para esse filtro.</p></div></div>`;
+    return;
+  }
+
+  const cats = ['seguranca', 'conforto', 'multimidia', 'telematica'];
+  const catLabels = { seguranca: 'Segurança Ativa & Passiva', conforto: 'Conforto & Ergonomia', multimidia: 'Multimídia & Entretenimento', telematica: 'Telemática & Conectividade' };
+  const catColors = { seguranca: '#ff6b47', conforto: '#47b8ff', multimidia: '#b847ff', telematica: '#e8ff47' };
+
+  const grouped = {};
+  items.forEach(item => {
+    if (!grouped[item.cat]) grouped[item.cat] = [];
+    grouped[item.cat].push(item);
+  });
+
+  cats.forEach(cat => {
+    if (!grouped[cat] || grouped[cat].length === 0) return;
+
+    const sec = document.createElement('section');
+    sec.innerHTML = `
+      <div class="section-title">
+        <span class="section-dot" style="background:${catColors[cat]}"></span>
+        ${catLabels[cat]}
+        <span class="count-badge">${grouped[cat].length}</span>
+      </div>
+    `;
+
+    const grid = document.createElement('div');
+    grid.className = 'grid';
+
+    grouped[cat].forEach((item, i) => {
+      const card = document.createElement('div');
+      card.className = `card ${item.cat}`;
+      card.style.animationDelay = `${i * 0.04}s`;
+
+      card.innerHTML = `
+        <div class="card-header">
+          <div class="card-name">${item.name}</div>
+          <span class="card-tag">${getCatLabel(item.cat)}</span>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">${item.desc}</p>
+          <div class="card-benefit">
+            <div class="benefit-label">▸ Benefício principal</div>
+            <div class="benefit-text">${item.benefit}</div>
+          </div>
+          ${item.aliases && item.aliases.length > 0 ? `
+          <div class="aliases-section">
+            <div class="aliases-label">Nomes por montadora</div>
+            <div class="aliases">
+              ${item.aliases.map(a => `<span class="alias-chip"><strong>${a.brand}:</strong> ${a.name}</span>`).join('')}
+            </div>
+          </div>` : ''}
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+
+    sec.appendChild(grid);
+    main.appendChild(sec);
+  });
+}
+
+// ─── Filter + Search ───
+let activeFilter = 'all';
+let searchQuery = '';
+
+function update() {
+  let items = data;
+  if (activeFilter !== 'all') items = items.filter(i => i.cat === activeFilter);
+  if (searchQuery) {
+    const q = searchQuery.toLowerCase();
+    items = items.filter(i =>
+      i.name.toLowerCase().includes(q) ||
+      i.desc.toLowerCase().includes(q) ||
+      i.benefit.toLowerCase().includes(q) ||
+      (i.aliases && i.aliases.some(a => a.brand.toLowerCase().includes(q) || a.name.toLowerCase().includes(q)))
+    );
+  }
+  render(items);
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter = btn.dataset.filter;
+    update();
+  });
+});
+
+document.getElementById('search').addEventListener('input', e => {
+  searchQuery = e.target.value.trim();
+  update();
+});
+
+document.getElementById('total-count').textContent = data.length;
+update();
+</script>
+</body>
+</html>
