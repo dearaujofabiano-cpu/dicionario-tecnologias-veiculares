@@ -1,0 +1,20 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Maskable: fundo cheio, conteúdo na safe zone (central 60%) -->
+  <rect width="512" height="512" fill="#0a0a0f"/>
+  <!-- Livro aberto — conteúdo dentro de ~154px..358px (safe zone) -->
+  <rect x="130" y="150" width="110" height="212" rx="8" fill="#e8ff47" opacity="0.92"/>
+  <rect x="272" y="150" width="110" height="212" rx="8" fill="#e8ff47" opacity="0.72"/>
+  <rect x="246" y="142" width="20" height="228" rx="5" fill="#e8ff47"/>
+  <rect x="148" y="186" width="74" height="7" rx="3" fill="#0a0a0f" opacity="0.35"/>
+  <rect x="148" y="204" width="58" height="6" rx="3" fill="#0a0a0f" opacity="0.35"/>
+  <rect x="148" y="220" width="66" height="6" rx="3" fill="#0a0a0f" opacity="0.35"/>
+  <rect x="148" y="236" width="50" height="6" rx="3" fill="#0a0a0f" opacity="0.35"/>
+  <rect x="148" y="252" width="68" height="6" rx="3" fill="#0a0a0f" opacity="0.35"/>
+  <rect x="148" y="268" width="54" height="6" rx="3" fill="#0a0a0f" opacity="0.35"/>
+  <rect x="290" y="186" width="74" height="7" rx="3" fill="#0a0a0f" opacity="0.25"/>
+  <rect x="290" y="204" width="58" height="6" rx="3" fill="#0a0a0f" opacity="0.25"/>
+  <rect x="290" y="220" width="66" height="6" rx="3" fill="#0a0a0f" opacity="0.25"/>
+  <rect x="290" y="236" width="50" height="6" rx="3" fill="#0a0a0f" opacity="0.25"/>
+  <rect x="290" y="252" width="68" height="6" rx="3" fill="#0a0a0f" opacity="0.25"/>
+  <rect x="290" y="268" width="54" height="6" rx="3" fill="#0a0a0f" opacity="0.25"/>
+</svg>

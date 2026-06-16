@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dicionário Técnico Veicular</title>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#e8ff47">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Dicionário">
+<link rel="apple-touch-icon" href="/icon.svg">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -430,6 +437,36 @@
     .grid { grid-template-columns: 1fr; }
     h1 { font-size: 56px; }
   }
+
+  /* PWA Install button */
+  .btn-instalar {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: #000;
+    border: none;
+    border-radius: 28px;
+    padding: 12px 22px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 4px 24px rgba(232,255,71,0.25);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-instalar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(232,255,71,0.35);
+  }
+  .btn-instalar svg { flex-shrink: 0; }
+  .btn-instalar[hidden] { display: none !important; }
 </style>
 </head>
 <body>
@@ -463,6 +500,13 @@
 </div>
 
 <main id="main"></main>
+
+<button id="btn-instalar" class="btn-instalar" hidden>
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M7 1v8M4 6l3 3 3-3M1 11h12" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  Instalar app
+</button>
 
 <footer>
   <div class="legend">
@@ -1392,6 +1436,36 @@ document.getElementById('search').addEventListener('input', e => {
 
 document.getElementById('total-count').textContent = data.length;
 update();
+</script>
+
+<script>
+// ─── PWA Install ───
+let _installPrompt = null;
+const btnInstalar = document.getElementById('btn-instalar');
+
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  _installPrompt = e;
+  btnInstalar.hidden = false;
+});
+
+btnInstalar.addEventListener('click', async () => {
+  if (!_installPrompt) return;
+  _installPrompt.prompt();
+  const { outcome } = await _installPrompt.userChoice;
+  _installPrompt = null;
+  btnInstalar.hidden = true;
+});
+
+window.addEventListener('appinstalled', () => {
+  _installPrompt = null;
+  btnInstalar.hidden = true;
+});
+
+// ─── Service Worker ───
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+}
 </script>
 </body>
 </html>
