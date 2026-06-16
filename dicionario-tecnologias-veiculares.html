@@ -21,6 +21,8 @@
     --confort: #47b8ff;
     --multi: #b847ff;
     --telem: #e8ff47;
+    --motor: #ff47b8;
+    --trans: #47ffc8;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -206,6 +208,8 @@
   .filter-btn.confort.active { background: var(--confort); border-color: var(--confort); }
   .filter-btn.multi.active { background: var(--multi); border-color: var(--multi); }
   .filter-btn.telem.active { background: var(--telem); border-color: var(--telem); color: #000; }
+  .filter-btn.motor.active { background: var(--motor); border-color: var(--motor); color: #fff; }
+  .filter-btn.trans.active { background: var(--trans); border-color: var(--trans); color: #000; }
 
   /* MAIN */
   main {
@@ -257,6 +261,8 @@
   .card.confort:hover { border-color: rgba(71,184,255,0.5); box-shadow: 0 12px 40px rgba(71,184,255,0.1); }
   .card.multi:hover { border-color: rgba(184,71,255,0.5); box-shadow: 0 12px 40px rgba(184,71,255,0.1); }
   .card.telem:hover { border-color: rgba(232,255,71,0.5); box-shadow: 0 12px 40px rgba(232,255,71,0.1); }
+  .card.motor:hover { border-color: rgba(255,71,184,0.5); box-shadow: 0 12px 40px rgba(255,71,184,0.1); }
+  .card.trans:hover { border-color: rgba(71,255,200,0.5); box-shadow: 0 12px 40px rgba(71,255,200,0.1); }
 
   .card-header {
     padding: 20px 20px 16px;
@@ -282,6 +288,8 @@
   .card.confort .card-tag { background: rgba(71,184,255,0.15); color: var(--confort); }
   .card.multi .card-tag { background: rgba(184,71,255,0.15); color: var(--multi); }
   .card.telem .card-tag { background: rgba(232,255,71,0.15); color: var(--telem); }
+  .card.motor .card-tag { background: rgba(255,71,184,0.15); color: var(--motor); }
+  .card.trans .card-tag { background: rgba(71,255,200,0.15); color: var(--trans); }
 
   .card-name {
     font-family: 'Bebas Neue', sans-serif;
@@ -433,7 +441,7 @@
   <p class="header-sub">Guia completo das principais tecnologias de segurança, conforto, multimídia e telemática utilizadas pelas montadoras no mercado nacional — com nomes alternativos por fabricante.</p>
   <div class="header-stats">
     <div class="stat"><span class="stat-num" id="total-count">0</span><span class="stat-label">Tecnologias</span></div>
-    <div class="stat"><span class="stat-num">4</span><span class="stat-label">Categorias</span></div>
+    <div class="stat"><span class="stat-num">6</span><span class="stat-label">Categorias</span></div>
     <div class="stat"><span class="stat-num">15+</span><span class="stat-label">Montadoras</span></div>
   </div>
 </header>
@@ -449,6 +457,8 @@
     <button class="filter-btn confort" data-filter="conforto">✦ Conforto</button>
     <button class="filter-btn multi" data-filter="multimidia">◈ Multimídia</button>
     <button class="filter-btn telem" data-filter="telematica">⬡ Telemática</button>
+    <button class="filter-btn motor" data-filter="motor">⚙ Motores</button>
+    <button class="filter-btn trans" data-filter="trans">⇄ Transmissão</button>
   </div>
 </div>
 
@@ -1011,6 +1021,266 @@ const data = [
       { brand: "IEEE", name: "DSRC (Dedicated Short-Range Communications)" },
       { brand: "Toyota", name: "ITS Connect (V2X Japão)" }
     ]
+  },
+
+  // ═══════════════════ MOTORES ═══════════════════
+  {
+    cat: "motor",
+    name: "Motor Aspirado — Ciclo Otto",
+    desc: "Motor de combustão interna que aspira a mistura ar-combustível pela pressão atmosférica, sem sobrealimentação. O ciclo Otto opera em 4 tempos: admissão, compressão, combustão e escapamento. A potência é diretamente proporcional ao deslocamento volumétrico (cilindrada) e à rotação do motor.",
+    benefit: "Resposta linear e previsível ao acelerador, manutenção simples e baixo custo. A ausência do turbocompressor elimina o turbo lag e reduz o número de componentes sujeitos a falha. Ideal para motoristas que priorizam confiabilidade e custo de manutenção.",
+    aliases: [
+      { brand: "Universal", name: "NA — Naturally Aspirated" },
+      { brand: "Volkswagen", name: "MPI (Multi Point Injection)" },
+      { brand: "Fiat", name: "Firefly 1.0 / 1.3 / 1.6 Fire" },
+      { brand: "GM/Chevrolet", name: "1.0 / 1.4 / 1.8 Flex" },
+      { brand: "Toyota", name: "2ZR / 2NR — Ciclo Atkinson em híbridos" }
+    ]
+  },
+  {
+    cat: "motor",
+    name: "Motor Turbo — Sobrealimentação",
+    desc: "Compressor de ar acionado pelos gases de escape que força mais ar para dentro dos cilindros, permitindo queimar mais combustível e gerar mais potência. O resultado é maior desempenho com deslocamento menor (downsizing). Turbo de geometria variável (VGT) e twin-scroll otimizam a resposta em diferentes faixas de rotação.",
+    benefit: "Combina potência de motor maior com eficiência de motor menor. Um 1.0 Turbo pode entregar a potência de um 1.6 aspirado consumindo menos combustível. Redução de cilindrada também diminui o atrito interno e as perdas mecânicas.",
+    aliases: [
+      { brand: "Volkswagen/Audi", name: "TSI / TFSI (Turbo Stratified Injection)" },
+      { brand: "GM/Chevrolet", name: "1.0 Turbo / 1.2 Turbo Flex" },
+      { brand: "Ford", name: "EcoBoost 1.0T / 1.5T / 2.0T" },
+      { brand: "Fiat/Stellantis", name: "GSE T3 Turbo / 1.3 Turbo 270" },
+      { brand: "Peugeot/Citroën", name: "THP / PureTech Turbo" },
+      { brand: "Hyundai/Kia", name: "T-GDi (Turbocharged GDI)" },
+      { brand: "Toyota", name: "GR Turbo / 1.2T" },
+      { brand: "BMW", name: "TwinPower Turbo" },
+      { brand: "Mercedes-Benz", name: "EQ Boost Turbo / M.I.L.D." }
+    ]
+  },
+  {
+    cat: "motor",
+    name: "Injeção Direta de Combustível (GDI / TFSI / TSI)",
+    desc: "O combustível é injetado diretamente na câmara de combustão (e não no coletor de admissão como na injeção indireta), com pressões de 150 a 350 bar. Permite controle preciso da quantidade e momento de injeção, melhorando a atomização do combustível e o resfriamento da câmara por evaporação.",
+    benefit: "Aumenta a eficiência térmica em até 15% e permite maior taxa de compressão sem detonação. Combinada com turbo, é a base das engines modernas de alta eficiência. Desvantagem: exige limpeza das válvulas de admissão a cada 50.000km em alguns modelos.",
+    aliases: [
+      { brand: "Volkswagen/Audi", name: "FSI / TFSI / TSI (com injeção direta)" },
+      { brand: "Hyundai/Kia", name: "GDI (Gasoline Direct Injection) / T-GDi" },
+      { brand: "GM/Chevrolet", name: "SIDI (Spark Ignition Direct Injection)" },
+      { brand: "Ford", name: "EcoBoost GDI" },
+      { brand: "Toyota", name: "D-4ST (Direct & Port Injection)" },
+      { brand: "BMW", name: "HPI (High Precision Injection)" },
+      { brand: "Mercedes-Benz", name: "CGI (Charged Gasoline Injection)" }
+    ]
+  },
+  {
+    cat: "motor",
+    name: "Motor Flex — Bicombustível",
+    desc: "Tecnologia desenvolvida no Brasil (1994–2003, Bosch/Magneti Marelli) que permite ao motor operar com qualquer proporção de gasolina e etanol, de E0 a E100. Sensores de oxigênio (lambda) e o mapa da central eletrônica (ECU) adaptam ignição, injeção e timing em tempo real conforme o combustível detectado.",
+    benefit: "Liberdade total de combustível: o motorista abastece com o que for mais barato ou disponível. O Brasil é referência mundial — mais de 85% dos veículos vendidos no país são flex. O etanol tem octanagem ~105 contra ~92 da gasolina, permitindo maior compressão e potência.",
+    aliases: [
+      { brand: "Universal Brasil", name: "Flex / FFV (Flexible Fuel Vehicle)" },
+      { brand: "Volkswagen", name: "EA211 Flex / EA888 Flex" },
+      { brand: "GM/Chevrolet", name: "FlexFuel / E-85 Capable" },
+      { brand: "Fiat/Stellantis", name: "Firefly Flex / GSE Flex" },
+      { brand: "Toyota", name: "Flex Dual VVT-i" },
+      { brand: "Hyundai/Kia", name: "Kappa Flex / Nu Flex" },
+      { brand: "Renault", name: "SCe Flex / TCe Flex" },
+      { brand: "Honda", name: "i-VTEC Flex" }
+    ]
+  },
+  {
+    cat: "motor",
+    name: "VVT / Fase Variável de Válvulas",
+    desc: "Sistema que altera o timing de abertura e fechamento das válvulas de admissão e/ou escape conforme a rotação e carga do motor. Em baixas rotações, favorece torque e eficiência; em altas rotações, favorece potência máxima. Versões mais avançadas também alteram o levantamento (lift) das válvulas (VTEC, Valvetronic).",
+    benefit: "Combina o torque de um motor de baixa rotação com a potência de um motor de alta rotação no mesmo conjunto. Melhora eficiência em 5–10% e reduz emissões em toda a faixa de uso. Base tecnológica dos motores modernos de combustão.",
+    aliases: [
+      { brand: "Toyota", name: "VVT-i (Variable Valve Timing with intelligence)" },
+      { brand: "Honda", name: "VTEC (Variable Valve Timing and Lift)" },
+      { brand: "BMW", name: "VANOS / Double VANOS / Valvetronic" },
+      { brand: "Volkswagen/Audi", name: "VarioCam / AVS (Audi Valve Lift System)" },
+      { brand: "Hyundai/Kia", name: "CVVT / CVVD (Continuously Variable Valve Duration)" },
+      { brand: "Ford", name: "Ti-VCT (Twin Independent Variable Camshaft Timing)" },
+      { brand: "GM/Chevrolet", name: "VVT (Active Fuel Management)" },
+      { brand: "Fiat", name: "MultiAir (Valvematic Electrohydraulic)" },
+      { brand: "Nissan", name: "VVEL (Variable Valve Event and Lift)" }
+    ]
+  },
+  {
+    cat: "motor",
+    name: "Motor Mild Hybrid — MHEV (48V)",
+    desc: "Sistema híbrido leve com uma bateria de 48V e um BSG (Belt-integrated Starter-Generator) ou CISG (Crankshaft Integrated). Recupera energia cinética na frenagem e a reutiliza para dar um boost de torque na aceleração e suavizar o sistema start-stop. NÃO permite tração exclusivamente elétrica.",
+    benefit: "Redução de consumo de 10 a 15% com custo de implementação muito menor que um híbrido completo. O start-stop com BSG 48V é mais suave e silencioso que versões de 12V. O boost elétrico melhora a resposta do turbo, eliminando o lag.",
+    aliases: [
+      { brand: "Mercedes-Benz", name: "EQ Boost (BSG 48V)" },
+      { brand: "Fiat/Stellantis", name: "BSG 48V Mild Hybrid" },
+      { brand: "RAM/Jeep", name: "eTorque (48V BSG)" },
+      { brand: "Volkswagen/Audi", name: "MHEV 48V / BAS" },
+      { brand: "Ford", name: "EcoBoost Mild Hybrid" },
+      { brand: "Renault", name: "E-Tech Mild Hybrid (12V/48V)" },
+      { brand: "Suzuki", name: "SHVS (Smart Hybrid Vehicle System 12V)" }
+    ]
+  },
+  {
+    cat: "motor",
+    name: "Motor Full Hybrid — HEV (Autorrecarregável)",
+    desc: "Sistema com motor a combustão e motor(es) elétrico(s) de maior potência, bateria de alta tensão (200–350V) e transmissão eletromecânica. Pode operar em modo puramente elétrico em baixas velocidades, em modo misto (combustão + elétrico) e recupera energia na frenagem. Não precisa ser ligado à tomada.",
+    benefit: "Redução de consumo de 20 a 40% no uso urbano, onde o motor elétrico é mais eficiente. Emissões urbanas quase nulas em trânsito lento. Silêncio ao partir. Ideal para cidades com muito tráfego. A bateria se recarrega sozinha — sem mudança de hábito para o motorista.",
+    aliases: [
+      { brand: "Toyota", name: "Toyota Hybrid System (THS II) — Corolla, RAV4, Yaris" },
+      { brand: "Honda", name: "Honda e:HEV — HR-V, CR-V, City" },
+      { brand: "Hyundai/Kia", name: "HEV — Ioniq, Tucson, Sorento" },
+      { brand: "Ford", name: "Ford Hybrid / FHEV — Maverick" },
+      { brand: "Lexus", name: "Lexus Hybrid Drive" },
+      { brand: "Renault", name: "E-Tech Full Hybrid" },
+      { brand: "Mercedes-Benz", name: "EQ (Classe E / GLE Hybrid)" }
+    ]
+  },
+  {
+    cat: "motor",
+    name: "Motor Plug-in Hybrid — PHEV",
+    desc: "Evolução do HEV com bateria de maior capacidade (8–25 kWh) que pode ser carregada na tomada (wallbox ou rede pública). Oferece autonomia elétrica pura de 40 a 100km, suficiente para o uso diário da maioria dos usuários. Nos trajetos mais longos, opera como um HEV convencional.",
+    benefit: "Para quem percorre menos de 60km por dia, pode funcionar quase como um elétrico puro (sem emissões, custo mínimo de energia elétrica) e ainda ter a segurança do motor a combustão para viagens longas. Incentivos fiscais em vários países.",
+    aliases: [
+      { brand: "Mitsubishi", name: "PHEV — Outlander PHEV (pioneiro no segmento)" },
+      { brand: "BMW", name: "iPerformance — X5 xDrive45e, 330e" },
+      { brand: "Volkswagen/Audi", name: "GTE / PHEV — Golf GTE, Q7 TFSI e" },
+      { brand: "Toyota", name: "Plug-in Hybrid — RAV4 Prime, Prius Prime" },
+      { brand: "Volvo", name: "Recharge (PHEV) — XC60, XC90" },
+      { brand: "Hyundai/Kia", name: "PHEV — Tucson PHEV, Sportage PHEV" },
+      { brand: "Ford", name: "Ford Escape PHEV / Kuga PHEV" }
+    ]
+  },
+  {
+    cat: "motor",
+    name: "Motor Elétrico Puro — BEV",
+    desc: "Veículo 100% elétrico com motor(es) elétrico(s) de corrente alternada (AC) alimentados por pacote de baterias de íons de lítio (400V ou 800V em modelos mais recentes). Torque máximo disponível instantaneamente desde 0 rpm. Recarga em tomada doméstica (AC, lenta), wallbox (AC, semi-rápida) ou eletroposto (DC fast charge).",
+    benefit: "Zero emissões locais, custo por km até 5x menor que gasolina, manutenção mínima (sem óleo, filtros, velas, correia). Desempenho superior na maioria das situações urbanas. Torque instantâneo proporciona sensação esportiva mesmo em versões populares.",
+    aliases: [
+      { brand: "Tesla", name: "BEV — Model 3, Y, S (pioneiro moderno)" },
+      { brand: "GM/Chevrolet", name: "BEV — BYD-Ultium / Bolt EV / Equinox EV" },
+      { brand: "Volkswagen", name: "BEV — ID.4, ID.3, ID. Buzz" },
+      { brand: "Hyundai/Kia", name: "BEV — Ioniq 5, Ioniq 6, EV6, EV9" },
+      { brand: "BMW", name: "BEV — i3, iX, i4, i7" },
+      { brand: "BYD", name: "BEV — Dolphin, Seal, Han, Atto 3" },
+      { brand: "Fiat", name: "BEV — Fiat 500e" },
+      { brand: "GWM", name: "BEV — ORA 03" }
+    ]
+  },
+  {
+    cat: "motor",
+    name: "Ciclo Miller / Ciclo Atkinson",
+    desc: "Variações do ciclo Otto que melhoram a eficiência térmica ao usar um tempo de expansão maior que o de compressão. No Ciclo Atkinson, as válvulas de admissão fecham tardiamente, reduzindo a compressão efetiva mas mantendo expansão total — resulta em maior eficiência mas menor potência por litro. Ciclo Miller usa sobrealimentação para compensar.",
+    benefit: "Eficiência térmica de 40–41% (vs ~35% do Otto convencional) — ideal para uso em híbridos onde o motor elétrico compensa a perda de potência em baixas rotações. O Toyota Prius popularizou o Atkinson; a Mazda usa o Miller no SkyActiv-X.",
+    aliases: [
+      { brand: "Toyota/Lexus", name: "Atkinson Cycle Engine (todos os HEV Toyota)" },
+      { brand: "Mazda", name: "SkyActiv-X (SPCCI com Ciclo Miller)" },
+      { brand: "Porsche", name: "Miller Cycle (Cayenne E-Hybrid / 718)" },
+      { brand: "Kia/Hyundai", name: "Atkinson Cycle (HEV Ioniq, Tucson HEV)" },
+      { brand: "Ford", name: "Atkinson Mode (Maverick Hybrid)" }
+    ]
+  },
+
+  // ═══════════════════ TRANSMISSÃO ═══════════════════
+  {
+    cat: "trans",
+    name: "Câmbio Manual (MT)",
+    desc: "Sistema de transmissão onde o motorista seleciona as marchas manualmente via alavanca e pedal de embreagem. A embreagem desacopla mecanicamente o motor da transmissão durante as trocas. Disponível de 5 a 7 velocidades. O câmbio de 6 velocidades (M-6) é o mais comum nos compactos e SUVs brasileiros.",
+    benefit: "Controle total da potência e do motor. Menor custo de aquisição e manutenção. Mais leve que câmbios automáticos. Ideal para quem gosta de dirigir ou precisa de precisão em situações de offroad leve. Eficiência próxima a um bom automático moderno.",
+    aliases: [
+      { brand: "Universal", name: "MT / Manual Transmission / Stick Shift" },
+      { brand: "Volkswagen", name: "MQ250 (5-vel.) / MQ350 (6-vel.)" },
+      { brand: "GM/Chevrolet", name: "M-5 / M-6 (5 ou 6 velocidades)" },
+      { brand: "Fiat/Stellantis", name: "C510 (5-vel.) / C635 (6-vel.)" },
+      { brand: "Toyota", name: "E356F / C60 (6-vel.)" },
+      { brand: "Honda", name: "6MT — Civic, HR-V" }
+    ]
+  },
+  {
+    cat: "trans",
+    name: "Câmbio Automático Hidráulico (AT)",
+    desc: "Usa um conversor de torque (que substitui a embreagem mecânica) e um trem epicicloidal para selecionar automaticamente as marchas conforme velocidade e carga. A versão mais moderna opera com 6 a 10 velocidades e tem modo manual via paddle shifters no volante. Totalmente transparente para o motorista.",
+    benefit: "Conforto máximo no trânsito, sem fadiga de embreagem. Os automáticos modernos de 6+ velocidades são mais eficientes que câmbios manuais em condução normal. Durabilidade comprovada com manutenção correta (troca de óleo a cada 60.000km).",
+    aliases: [
+      { brand: "GM/Chevrolet", name: "Hydra-Matic A-6 / A-8 / A-9 / A-10" },
+      { brand: "Toyota", name: "UA80E/F (6-vel.) / UA80F (off-road)" },
+      { brand: "Volkswagen/Audi", name: "Tiptronic 6AT / ZF8AT (8-vel.)" },
+      { brand: "BMW", name: "ZF 8HP (8-vel. Steptronic)" },
+      { brand: "Mercedes-Benz", name: "7G-Tronic / 9G-Tronic" },
+      { brand: "Hyundai/Kia", name: "A6GF1 (6-vel.) / A8LF1 (8-vel.)" },
+      { brand: "Aisin/ZF", name: "Fornecedores independentes para múltiplas marcas" }
+    ]
+  },
+  {
+    cat: "trans",
+    name: "CVT — Variador Contínuo de Velocidade",
+    desc: "Transmissão com dois cones (polia primária e secundária) conectados por uma corrente ou correia de aço. Não tem marchas fixas — varia de forma contínua entre a relação mais curta e mais longa (razão de ~6:1 a 8:1). A ECU mantém o motor na rotação de máxima eficiência ou máxima potência conforme o pedido do motorista.",
+    benefit: "Suavidade absoluta sem solavanco de trocas. Mantém o motor no ponto de máxima eficiência, resultando em consumo menor em uso urbano. Versões com Simulated Steps (marchas virtuais) simulam uma sensação de câmbio automático convencional.",
+    aliases: [
+      { brand: "Renault", name: "CVT-7 / X-Tronic (Juke, Captur, Arkana)" },
+      { brand: "Nissan", name: "X-Tronic CVT (Kicks, Sentra)" },
+      { brand: "Subaru", name: "Lineartronic CVT (todos os modelos)" },
+      { brand: "Toyota", name: "Direct Shift CVT / K-Drive (Corolla, Yaris)" },
+      { brand: "Honda", name: "CVT Earth Dreams (Fit, HR-V, City)" },
+      { brand: "Hyundai/Kia", name: "CVT — HEV models" },
+      { brand: "Jeep/Fiat", name: "UConnect CVT (Compass 1.3 Turbo)" }
+    ]
+  },
+  {
+    cat: "trans",
+    name: "DCT / DSG — Câmbio de Dupla Embreagem",
+    desc: "Usa duas embreagens independentes: uma para as marchas ímpares (1ª, 3ª, 5ª, 7ª) e outra para as pares (2ª, 4ª, 6ª, 8ª). Enquanto uma marcha está engajada, a próxima já está pré-selecionada — a troca ocorre em milissegundos sem interrupção do fluxo de potência. Disponível molhado (em óleo — suporta maior torque) ou seco (mais eficiente, menor torque).",
+    benefit: "Velocidade de troca sub-100ms — mais rápido que qualquer câmbio manual ou automático hidráulico. Eficiência próxima ao câmbio manual. Sensação esportiva com conforto de automático. O DSG 7-vel. seco domina o mercado popular europeu/brasileiro.",
+    aliases: [
+      { brand: "Volkswagen/Audi/Skoda/Seat", name: "DSG 7-vel. seco (DQ200) / DSG 6-vel. molhado (DQ250)" },
+      { brand: "Ford", name: "PowerShift 6DCT / 7DCT (Fiesta, Focus, EcoSport)" },
+      { brand: "Hyundai/Kia", name: "7DCT / 8DCT (I30 N, Tucson N Line)" },
+      { brand: "BMW", name: "M-DCT (M2, M3, M4)" },
+      { brand: "Porsche", name: "PDK (Porsche Doppelkupplungsgetriebe)" },
+      { brand: "Renault", name: "EDC (Efficient Dual Clutch) — Duster, Captur" },
+      { brand: "Mercedes-Benz", name: "7G-DCT / 8G-DCT AMG" }
+    ]
+  },
+  {
+    cat: "trans",
+    name: "AMT — Câmbio Automatizado (Robotizado)",
+    desc: "Um câmbio manual convencional com atuadores eletro-hidráulicos ou eletromecânicos que acionam a embreagem e trocam as marchas automaticamente, sem pedal de embreagem para o motorista. É mecanicamente um câmbio manual — a automação é feita por solenoides controlados pela ECU.",
+    benefit: "Custo muito menor que um automático convencional ou DCT. Consumo e peso similares ao câmbio manual. Viabilizou câmbios automáticos em veículos populares de custo reduzido. Desvantagem: solavancos nas trocas são perceptíveis, especialmente em tráfego urbano lento.",
+    aliases: [
+      { brand: "Fiat/Stellantis", name: "Dualogic (Palio, Punto, 500)" },
+      { brand: "Toyota", name: "AGS — Auto Gear Shift (Etios, antigo)" },
+      { brand: "Suzuki", name: "AGS (Alto, Swift)" },
+      { brand: "Renault", name: "Easy-R AMT (Kwid, Sandero antigo)" },
+      { brand: "Citroën/Peugeot", name: "ETG6 (antigos C3, 208)" },
+      { brand: "Isuzu/Hyundai Trucks", name: "AMT para veículos comerciais" }
+    ]
+  },
+  {
+    cat: "trans",
+    name: "Câmbio Automático de 8 a 10 Velocidades",
+    desc: "Evolução dos câmbios hidráulicos com 8, 9 ou 10 velocidades, desenvolvida para permitir ao motor operar sempre na faixa de máxima eficiência. A maior quantidade de relações reduz o gap entre marchas, resultando em trocas imperceptíveis e mantendo a rotação ideal em aceleração e cruceiro.",
+    benefit: "Redução de consumo de 6 a 10% em relação a câmbios de 6 velocidades. Aceleração mais suave e progressiva. O ZF 8HP é o câmbio automático mais usado no mundo e equipou veículos de diversas marcas simultaneamente.",
+    aliases: [
+      { brand: "ZF (fornecedor universal)", name: "8HP (8-vel.) — BMW, Jaguar, RAM, Chrysler, Fiat, Hyundai" },
+      { brand: "GM/Chevrolet", name: "Hydra-Matic 8L90 (8-vel.) / 10L80 (10-vel.)" },
+      { brand: "Ford", name: "SelectShift 10R80 (10-vel.) — F-150, Mustang" },
+      { brand: "Mercedes-Benz", name: "9G-Tronic (9-vel.) — motor e híbrido" },
+      { brand: "Aisin (fornecedor)", name: "AW8F45 (8-vel.) — Toyota, Lexus, Volvo, VW" },
+      { brand: "Honda", name: "10AT (10-vel.) — Accord, Pilot, Passport" }
+    ]
+  },
+  {
+    cat: "trans",
+    name: "AWD / 4x4 — Tração Integral",
+    desc: "Sistema que distribui torque para as quatro rodas. AWD (All-Wheel Drive) é geralmente permanente ou automático, ativado eletronicamente conforme necessidade — sem intervenção do motorista. 4x4 tradicional (Part-Time) é selecionado manualmente e usado em off-road. 4x4 Full-Time é permanente, com diferencial central bloqueável.",
+    benefit: "Tração superior em piso molhado, terra, cascalho e neve. Permite aceleração mais rápida sem patinamento. Em SUVs, aumenta significativamente a capacidade off-road e a segurança em climas adversos. Em superesportivos, permite distribuição ativa de torque para precisão em curvas.",
+    aliases: [
+      { brand: "Volkswagen", name: "4Motion (Haldex ou Torsen)" },
+      { brand: "Audi", name: "Quattro (Torsen / Ultra)" },
+      { brand: "BMW", name: "xDrive (AWD ativo)" },
+      { brand: "Mercedes-Benz", name: "4MATIC / 4MATIC+ / AMG Performance 4MATIC" },
+      { brand: "Subaru", name: "Symmetrical AWD (diferencial central viscoso)" },
+      { brand: "Honda", name: "i-AWD / SH-AWD (Sport Hybrid AWD)" },
+      { brand: "Toyota", name: "AWD-i (elétrico no eixo traseiro — híbridos)" },
+      { brand: "Jeep", name: "Selec-Terrain 4x4 / Selec-Speed 4x4" },
+      { brand: "GM/Chevrolet", name: "Intelligent AWD / AutoTrac 4WD" }
+    ]
   }
 ];
 
@@ -1029,9 +1299,9 @@ function render(items) {
     return;
   }
 
-  const cats = ['seguranca', 'conforto', 'multimidia', 'telematica'];
-  const catLabels = { seguranca: 'Segurança Ativa & Passiva', conforto: 'Conforto & Ergonomia', multimidia: 'Multimídia & Entretenimento', telematica: 'Telemática & Conectividade' };
-  const catColors = { seguranca: '#ff6b47', conforto: '#47b8ff', multimidia: '#b847ff', telematica: '#e8ff47' };
+  const cats = ['seguranca', 'conforto', 'multimidia', 'telematica', 'motor', 'trans'];
+  const catLabels = { seguranca: 'Segurança Ativa & Passiva', conforto: 'Conforto & Ergonomia', multimidia: 'Multimídia & Entretenimento', telematica: 'Telemática & Conectividade', motor: 'Motores & Propulsão', trans: 'Transmissão & Tração' };
+  const catColors = { seguranca: '#ff6b47', conforto: '#47b8ff', multimidia: '#b847ff', telematica: '#e8ff47', motor: '#ff47b8', trans: '#47ffc8' };
 
   const grouped = {};
   items.forEach(item => {
